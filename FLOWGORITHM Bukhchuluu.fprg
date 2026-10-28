@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="quest"/>
+        <attribute name="authors" value="Bukhchuluu"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-28 09:19:38 PM"/>
+        <attribute name="created" value="VXNlcjtERVNLVE9QLTc2U0JKQlE7MjAyNi0xMC0yODswOToxNzowNSBQTTsyNzY0"/>
+        <attribute name="edited" value="VXNlcjtERVNLVE9QLTc2U0JKQlE7MjAyNi0xMC0yODswOToxOTozOCBQTTsxOzI4ODA="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="zai, hurd, pace" type="Real" array="False" size=""/>
+            <declare name="h, m, s, niit, p, pm, ps" type="Integer" array="False" size=""/>
+            <declare name="km, t, k, rh, rm, rs, rt" type="Integer" array="False" size=""/>
+            <declare name="t1, t2, t3, b1, b2, b3, tmp" type="Integer" array="False" size=""/>
+            <assign variable="t1" expression="0"/>
+            <assign variable="t2" expression="0"/>
+            <assign variable="t3" expression="0"/>
+            <assign variable="b1" expression="1"/>
+            <assign variable="b2" expression="2"/>
+            <assign variable="b3" expression="3"/>
+            <do expression="zai &lt; 25 or zai &gt; 100">
+                <output expression="&quot;&#1047;&#1072;&#1081;&#1075; &#1082;&#1084;-&#1101;&#1101;&#1088; &#1086;&#1088;&#1091;&#1091;&#1083;&#1085;&#1072; &#1091;&#1091; (25-100):&quot;" newline="True"/>
+                <input variable="zai"/>
+                <if expression="zai &lt; 25 or zai &gt; 100">
+                    <then>
+                        <output expression="&quot;&#1040;&#1083;&#1076;&#1072;&#1072;: &#1079;&#1072;&#1081; 25-&#1072;&#1072;&#1089; 100 &#1082;&#1084; &#1093;&#1086;&#1086;&#1088;&#1086;&#1085;&#1076; &#1073;&#1072;&#1081;&#1093; &#1105;&#1089;&#1090;&#1086;&#1081;.&quot;" newline="True"/>
+                    </then>
+                    <else/>
+                </if>
+            </do>
+            <do expression="h &lt; 0 or m &lt; 0 or m &gt; 59 or s &lt; 0 or s &gt; 59 or (h == 0 and m == 0 and s == 0)">
+                <output expression="&quot;&#1044;&#1091;&#1091;&#1089;&#1075;&#1072;&#1089;&#1072;&#1085; &#1093;&#1091;&#1075;&#1072;&#1094;&#1072;&#1072; (&#1094;&#1072;&#1075; &#1084;&#1080;&#1085;&#1091;&#1090; &#1089;&#1077;&#1082;&#1091;&#1085;&#1076;):&quot;" newline="True"/>
+                <input variable="h"/>
+                <input variable="m"/>
+                <input variable="s"/>
+                <if expression="h &lt; 0 or m &lt; 0 or m &gt; 59 or s &lt; 0 or s &gt; 59 or (h == 0 and m == 0 and s == 0)">
+                    <then>
+                        <output expression="&quot;&#1040;&#1083;&#1076;&#1072;&#1072;: &#1094;&#1072;&#1075; &gt;= 0, &#1084;&#1080;&#1085;&#1091;&#1090; 0-59, &#1089;&#1077;&#1082;&#1091;&#1085;&#1076; 0-59.&quot;" newline="True"/>
+                    </then>
+                    <else/>
+                </if>
+            </do>
+            <assign variable="niit" expression="h*3600 + m*60 + s"/>
+            <assign variable="hurd" expression="zai / (niit / 3600)"/>
+            <assign variable="pace" expression="niit / zai"/>
+            <assign variable="p" expression="Round(pace)"/>
+            <assign variable="pm" expression="(p - p % 60) / 60"/>
+            <assign variable="ps" expression="p % 60"/>
+            <output expression="&quot;&#1044;&#1091;&#1085;&#1076;&#1072;&#1078; &#1093;&#1091;&#1088;&#1076;: &quot; &amp; hurd &amp; &quot; &#1082;&#1084;/&#1094;&quot;" newline="True"/>
+            <output expression="&quot;1 &#1082;&#1084;-&#1080;&#1081;&#1085; &#1093;&#1091;&#1075;&#1072;&#1094;&#1072;&#1072;: &quot; &amp; pm &amp; &quot;:&quot; &amp; ps" newline="True"/>
+            <if expression="hurd &gt;= 15">
+                <then>
+                    <output expression="&quot;&#1058;&#1199;&#1074;&#1096;&#1080;&#1085;: &#1069;&#1083;&#1080;&#1090;&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="hurd &gt;= 10">
+                        <then>
+                            <output expression="&quot;&#1058;&#1199;&#1074;&#1096;&#1080;&#1085;: &#1044;&#1091;&#1085;&#1076;&#1072;&#1078;&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;&#1058;&#1199;&#1074;&#1096;&#1080;&#1085;: &#1069;&#1093;&#1083;&#1101;&#1085; &#1075;&#1199;&#1081;&#1075;&#1095;&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <output expression="&quot;&#1050;&#1084;     &#1061;&#1091;&#1075;&#1072;&#1094;&#1072;&#1072;&quot;" newline="True"/>
+            <for variable="km" start="5" end="zai" direction="inc" step="5">
+                <assign variable="t" expression="Round(pace * km)"/>
+                <output expression="km &amp; &quot;     &quot;" newline="False"/>
+                <call expression="PrintTime(t)"/>
+            </for>
+            <output expression="&quot;Finish &quot;" newline="False"/>
+            <call expression="PrintTime(niit)"/>
+            <for variable="k" start="1" end="3" direction="inc" step="1">
+                <do expression="rh &lt; 0 or rm &lt; 0 or rm &gt; 59 or rs &lt; 0 or rs &gt; 59 or (rh == 0 and rm == 0 and rs == 0)">
+                    <output expression="&quot;&#1043;&#1199;&#1081;&#1075;&#1095;&#1080;&#1081;&#1085; &#1093;&#1091;&#1075;&#1072;&#1094;&#1072;&#1072; (&#1094;&#1072;&#1075; &#1084;&#1080;&#1085;&#1091;&#1090; &#1089;&#1077;&#1082;&#1091;&#1085;&#1076;):&quot;" newline="True"/>
+                    <input variable="rh"/>
+                    <input variable="rm"/>
+                    <input variable="rs"/>
+                    <if expression="rh &lt; 0 or rm &lt; 0 or rm &gt; 59 or rs &lt; 0 or rs &gt; 59 or (rh == 0 and rm == 0 and rs == 0)">
+                        <then>
+                            <output expression="&quot;&#1040;&#1083;&#1076;&#1072;&#1072;: &#1093;&#1091;&#1075;&#1072;&#1094;&#1072;&#1072; &#1073;&#1091;&#1088;&#1091;&#1091; &#1073;&#1072;&#1081;&#1085;&#1072;.&quot;" newline="True"/>
+                        </then>
+                        <else/>
+                    </if>
+                </do>
+                <assign variable="rt" expression="rh*3600 + rm*60 + rs"/>
+                <if expression="k == 1">
+                    <then>
+                        <assign variable="t1" expression="rt"/>
+                    </then>
+                    <else>
+                        <if expression="k == 2">
+                            <then>
+                                <assign variable="t2" expression="rt"/>
+                            </then>
+                            <else>
+                                <assign variable="t3" expression="rt"/>
+                            </else>
+                        </if>
+                    </else>
+                </if>
+            </for>
+            <if expression="t1 &gt; t2">
+                <then>
+                    <assign variable="tmp" expression="t1"/>
+                    <assign variable="t1" expression="t2"/>
+                    <assign variable="t2" expression="tmp"/>
+                    <assign variable="tmp" expression="b1"/>
+                    <assign variable="b1" expression="b2"/>
+                    <assign variable="b2" expression="tmp"/>
+                </then>
+                <else/>
+            </if>
+            <if expression="t2 &gt; t3">
+                <then>
+                    <assign variable="tmp" expression="t2"/>
+                    <assign variable="t2" expression="t3"/>
+                    <assign variable="t3" expression="tmp"/>
+                    <assign variable="tmp" expression="b2"/>
+                    <assign variable="b2" expression="b3"/>
+                    <assign variable="b3" expression="tmp"/>
+                </then>
+                <else/>
+            </if>
+            <if expression="t1 &gt; t2">
+                <then>
+                    <assign variable="tmp" expression="t1"/>
+                    <assign variable="t1" expression="t2"/>
+                    <assign variable="t2" expression="tmp"/>
+                    <assign variable="tmp" expression="b1"/>
+                    <assign variable="b1" expression="b2"/>
+                    <assign variable="b2" expression="tmp"/>
+                </then>
+                <else/>
+            </if>
+            <output expression="&quot;1-&#1088; &#1073;&#1072;&#1081;&#1088;: &#1075;&#1199;&#1081;&#1075;&#1095; &quot; &amp; b1 &amp; &quot;  &quot;" newline="False"/>
+            <call expression="PrintTime(t1)"/>
+            <output expression="&quot;2-&#1088; &#1073;&#1072;&#1081;&#1088;: &#1075;&#1199;&#1081;&#1075;&#1095; &quot; &amp; b2 &amp; &quot;  &quot;" newline="False"/>
+            <call expression="PrintTime(t2)"/>
+            <output expression="&quot;3-&#1088; &#1073;&#1072;&#1081;&#1088;: &#1075;&#1199;&#1081;&#1075;&#1095; &quot; &amp; b3 &amp; &quot;  &quot;" newline="False"/>
+            <call expression="PrintTime(t3)"/>
+        </body>
+    </function>
+    <function name="PrintTime" type="None" variable="">
+        <parameters>
+            <parameter name="sec" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="hh, mm, ss" type="Integer" array="False" size=""/>
+            <assign variable="ss" expression="sec % 60"/>
+            <assign variable="mm" expression="((sec % 3600) - ss) / 60"/>
+            <assign variable="hh" expression="(sec - sec % 3600) / 3600"/>
+            <output expression="hh &amp; &quot;:&quot; &amp; mm &amp; &quot;:&quot; &amp; ss" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
